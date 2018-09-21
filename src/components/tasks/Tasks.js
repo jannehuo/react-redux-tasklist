@@ -12,6 +12,9 @@ class Tasks extends React.Component {
         };
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmitTask = this.onSubmitTask.bind(this);
+        this.updateTask = this.updateTask.bind(this);
+        this.removeTask = this.removeTask.bind(this);
+        this.taskRow = this.taskRow.bind(this);
     }
     componentDidMount() {
         //console.log(this.state);
@@ -29,8 +32,17 @@ class Tasks extends React.Component {
             task: {name:'', done:false}
         });
     }
+    updateTask(num) {
+        
+    }
+    removeTask(num) {
+        const elementToRemove = document.querySelector(`[data-item-num="${num}"]`);
+        const index = num - 1;
+        //elementToRemove.classList.add('removing');
+        this.props.actions.removeTask(index);
+    }
     taskRow(task,index) {
-        return <SingleTask key={index} num={index + 1} name={task.task.name} />;
+        return <SingleTask key={index} num={index + 1} name={task.task.name} remove={this.removeTask} update={this.updateTask}/>;
     }
     render() {
         return (

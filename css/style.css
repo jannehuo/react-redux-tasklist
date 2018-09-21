@@ -139,6 +139,19 @@ ol li {
     -webkit-animation-fill-mode: forwards;
 }
 
+ol li.removing {
+    animation-name: hide-list-item;
+    animation-duration: 0.2s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+    -webkit-animation-name: hide-list-item;
+    -webkit-animation-duration: 0.2s;
+    -webkit-animation-delay: 0.2s;
+    -webkit-animation-fill-mode: forwards;
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+}
+
 li .item-content {
     display: flex;
     align-items: center;
@@ -147,6 +160,10 @@ li .item-content {
 
 .item-content-text {
     font-family: "Arial Black", "Arial Bold", Helvetica, sans-serif;
+}
+
+button:focus {
+    outline: none;
 }
 
 @keyframes show-list-item {
