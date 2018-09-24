@@ -39,7 +39,10 @@ class TaskApi {
     task = Object.assign({}, task);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        tasks.push(task);
+        tasks.push({
+          name: task.task.name,
+          done: task.task.done
+        });
         resolve(task);
       }, delay);
     });
@@ -49,6 +52,7 @@ class TaskApi {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         tasks.splice(index, 1);
+        console.log(tasks);
         resolve(tasks);
       }, delay);
     });
