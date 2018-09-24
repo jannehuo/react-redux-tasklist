@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as taskActions from '../../actions/taskActions';
-import SingleTask from './singleTask';
+import TaskList from './taskList';
+import AddTask from './addTask';
 import {bindActionCreators} from 'redux';
 
 class Tasks extends React.Component {
@@ -14,7 +15,6 @@ class Tasks extends React.Component {
         this.onSubmitTask = this.onSubmitTask.bind(this);
         this.updateTask = this.updateTask.bind(this);
         this.removeTask = this.removeTask.bind(this);
-        this.taskRow = this.taskRow.bind(this);
     }
     componentDidMount() {
         //console.log(this.state);
@@ -33,32 +33,18 @@ class Tasks extends React.Component {
         });
     }
     updateTask(num) {
-        
+        this.props.actions.updateTask(num);
     }
     removeTask(num) {
         const elementToRemove = document.querySelector(`[data-item-num="${num}"]`);
-        const index = num - 1;
-        //elementToRemove.classList.add('removing');
-        this.props.actions.removeTask(index);
-    }
-    taskRow(task,index) {
-        return <SingleTask key={index} num={index + 1} name={task.task.name} remove={this.removeTask} update={this.updateTask}/>;
+        this.props.actions.removeTask(num);
     }
     render() {
         return (
             <div className="page-content">
                 <h1 className="text-center">Tasks</h1>
-                <form onSubmit={this.onSubmitTask}>
-                    <div className="input-row">
-                        <input type="text" placeholder="New Task" onChange={this.onInputChange} value={this.state.task.name}/>
-                        <button type="submit" className="btn">
-                            <i className="material-icons md-36">add</i>
-                        </button>
-                    </div>
-                </form>
-                <ol>
-                    {this.props.tasks.map(this.taskRow)}
-                </ol>
+                <AddTask inputChange={this.onInputChange} onSubmit={this.onSubmitTask} inputValue={this.state.task.name} />
+                <TaskList tasks={this.props.tasks} removeTask={this.removeTask} updateTask={this.updateTask} />
             </div>
         );
     }

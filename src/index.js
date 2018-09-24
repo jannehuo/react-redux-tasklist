@@ -6,8 +6,10 @@ import routes from './routes';
 import '../css/style.css';
 import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
+import {loadTasks} from './actions/taskActions';
 
 const store = configureStore();
+store.dispatch(loadTasks());
 
 render(
     <Provider store={store}>

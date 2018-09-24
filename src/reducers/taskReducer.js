@@ -1,11 +1,19 @@
 import * as types from '../actions/actionTypes';
+import initialState from './initialState';
 
-export default function taskReducer(state = [], action) {
+export default function taskReducer(state = initialState.tasks, action) {
     switch(action.type) {
-        case types.CREATE_TASK:
-            return [...state, Object.assign({},action.task)];
-        case types.REMOVE_TASK:
-            return [...state.slice(0,action.index), ...state.slice(action.index + 1)];
+        case types.CREATE_TASK_SUCCESS:
+            return [...state, {
+                name: action.task.task.name,
+                done: action.task.task.done
+            }];
+        case types.REMOVE_TASK_SUCCESS:
+            return [...action.tasks];
+        case types.UPDATE_TASK_SUCCESS:
+            return [...action.tasks];
+        case types.LOAD_TASKS_SUCCESS:
+            return [...action.tasks];
         default:
             return state;
     }

@@ -137,6 +137,8 @@ ol li {
     -webkit-animation-duration: 0.2s;
     -webkit-animation-delay: 0.2s;
     -webkit-animation-fill-mode: forwards;
+    position: relative;
+    padding: 0 10px;
 }
 
 ol li.removing {
@@ -158,12 +160,72 @@ li .item-content {
     justify-content: space-between;
 }
 
+li:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 70%;
+    width: 0%;
+    background-color: #ffffff;
+    opacity: 1;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transition: width 0.2s ease;
+    -webkit-transition: width 0.2 ease;
+}
+
+li.task-done:before {
+    width: 100%;
+}
+
+li.task-done > .item-content > .item-content-controls {
+    position: relative;
+}
+
+li.task-done > .item-content > .item-content-text {
+    position: relative;
+    color: #333333;
+    opacity: 0.2;
+}
+
+li.task-done .item-content .item-content-controls .btn {
+    color: #333333;
+}
+
 .item-content-text {
     font-family: "Arial Black", "Arial Bold", Helvetica, sans-serif;
 }
 
 button:focus {
     outline: none;
+}
+
+.loader-bar {
+    width: 100%;
+    height: 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.loader-bar.show {
+    display: block;
+}
+
+.loader-bar-inner-bar {
+    height: 100%;
+    width: 0;
+    background: #f2f2f2;
+    position: absolute;
+    animation-name: inner-bar;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: inner-bar;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
 }
 
 @keyframes show-list-item {
@@ -202,3 +264,32 @@ button:focus {
     }
 }
 
+@keyframes inner-bar {
+    0% {
+        left: 0;
+        width: 0;
+    }
+    50% {
+        left: 50%;
+        width: 70%;
+    }
+    100% {
+        left: 100%;
+        width: 0;
+    }
+}
+
+@-webkit-keyframes inner-bar {
+    0% {
+        left: 0;
+        width: 0;
+    }
+    50% {
+        left: 50%;
+        width: 100%;
+    }
+    100% {
+        left: 100%;
+        width: 0;
+    }
+}
