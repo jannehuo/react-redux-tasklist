@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
-import Tasks from './taskReducer';
-import AjaxCalls from './ajaxStatusReducer';
+import tasks from './taskReducer';
+import ajaxCalls from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
-    Tasks,
-    AjaxCalls
+    tasks,
+    ajaxCalls
 });
 
 export default rootReducer;

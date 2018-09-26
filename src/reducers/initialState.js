@@ -1,4 +1,4 @@
 export default {
     tasks: [],
-    ajaxCallsInProgress:0
+    ajaxCalls:0
 };

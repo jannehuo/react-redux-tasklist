@@ -5,11 +5,12 @@ import TaskList from './taskList';
 import AddTask from './addTask';
 import {bindActionCreators} from 'redux';
 
-class Tasks extends React.Component {
+export class Tasks extends React.Component {
     constructor(props,context) {
         super(props);
         this.state = {
-            task: {name:'', done:false}
+            task: {name:'', done:false},
+            error: true
         };
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmitTask = this.onSubmitTask.bind(this);
@@ -27,10 +28,17 @@ class Tasks extends React.Component {
     }
     onSubmitTask(e) {
         e.preventDefault();
-        this.props.actions.createTask(this.state);
-        this.setState({
-            task: {name:'', done:false}
-        });
+        if(this.state.task.name.length > 0) {
+            this.props.actions.createTask(this.state);
+            this.setState({
+                task: {name:'', done:false},
+                error: false
+            });
+        } else {
+            this.setState({
+                error: true
+            });
+        }
     }
     updateTask(num) {
         this.props.actions.updateTask(num);
@@ -57,7 +65,7 @@ Tasks.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        tasks: state.Tasks
+        tasks: state.tasks
     };
 }
 

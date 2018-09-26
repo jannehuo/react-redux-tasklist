@@ -22,7 +22,7 @@ App.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        loading: state.AjaxCalls > 0
+        loading: state.ajaxCalls > 0
     };
 }
 

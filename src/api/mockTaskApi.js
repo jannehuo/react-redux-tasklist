@@ -52,7 +52,6 @@ class TaskApi {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         tasks.splice(index, 1);
-        console.log(tasks);
         resolve(tasks);
       }, delay);
     });
